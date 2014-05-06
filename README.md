@@ -1,40 +1,21 @@
-# Demo: tabletop to datatables
-
-Use [Tabletop.js](http://builtbybalance.com/Tabletop/) to pull json from Google Spreadsheet and feed it to the [DataTables](http://datatables.net/) jQuery plugin.
-
-Demo by [Chris Essig](https://twitter.com/CourierEssig) &amp; [Chris Keller](https://twitter.com/ChrisLKeller) made possible thanks to the Open Source work of [Built By Balance](http://builtbybalance.com) &amp; [Allan Jardine](https://github.com/DataTables).
-
-- [Demo Page](http://projects.chrislkeller.com/demos/tabletop_to_datatables)
-- [Repo](https://github.com/chrislkeller/tabletop_to_datatables)
-- [ReadMe](https://github.com/chrislkeller/tabletop_to_datatables#readme)
+# Eddie DataTable Generator
 
 
-**Step 1** - [Prepare Google Spreadsheet data](http://builtbybalance.com/Tabletop/#tabletop-instructions).
+**Step 1** - Create Google Spreadsheet:
+                    There are several caveats to creating this spreadsheet: please name all the column heads 'col1', 'col2' and so on. This is so that Eddie Can Parse the column Data. Future versions will lift column titles directly.
 
-**Step 2** - Add your spreadsheet key as an argument to the initializeTabletopObject function that is fired on document ready.
 
-        initializeTabletopObject('0An8W63YKWOsxdHVreXpLbVRWUGlJUlcweHVfZ01ycVE');
+**Step 2** - Publish Google Spreadsheet to Web:
+                    Make sure the viewer permissions are public. [A Demonstration Sheet can be found here](https://docs.google.com/spreadsheet/pub?key=0AkTBIga8sxWGdG52NkFGM3hEdUVlSFh5ekhmLVRFZEE&output=html)
 
-**Step 3** - Set up your DataTables column headers in by adjusting the array in the createTableColumns() function. You'll be changing the value for both the mDataProp and sTitle keys.
+**Step 3** - Open up the Eddie Homepage, and follow the directions from there. You will add the title, link and the number of columns from your spreadsheet that you wish to display.
 
-        var tableColumns =   [
-    		{'mDataProp': 'name', 'sTitle': 'Name', 'sClass': 'center'},
-    		{'mDataProp': 'website', 'sTitle': 'Website', 'sClass': 'center'},
-    		{'mDataProp': 'city', 'sTitle': 'City', 'sClass': 'center'}
-    	];
 
-**Step 4** - Push the data to the table in tabletop_feed.js. I am creating a table with an id of data-table-container in the #demo div. I am then writing the datatable to that data-table-container div.
+**Step 4** - Eddie the overeager computer generates and overeager data table that can quickly be sorted and searched.
 
-        // create the table container and object
-        function writeTableWith(dataSource){
-            jqueryNoConflict('#demo').html('<table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered table-striped" id="data-table-container"></table>');
 
-            var oTable = jqueryNoConflict('#data-table-container').dataTable({
-                'aaData': dataSource,
-                'aoColumns': createTableColumns()
-            });
-        };
+**Issues** : 
+--The columns are simply named "Column 1" and so forth. Parsing of the Column Data names from the google spreadsheet API and the existing tabletop.js library proved difficult
 
-## Links & Resources
+--There is currently not a way to republish and Eddie table to a third party platform. Issues with creating a fully functioning server and generating unique pages for individual use could not be completed in time for submission.
 
-* [Data Tables](http://datatables.net/index)
